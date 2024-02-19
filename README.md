@@ -7,3 +7,5 @@ Simple demo, with all shader triggers disabled and all camera triggers (except z
 https://github.com/RayDeeUx/CameraShaderToggles/assets/51521765/549a3131-7b70-455f-9e96-af5bba0ba558
 
 (Disclaimer: other Geode mods were active during this recording.)
+
+This mod will not work on macOS.
