@@ -9,6 +9,7 @@
 	"name": "CameraShaderToggles",
 	"developer": "RayDeeUx",
 	"description": "Individual toggles for each type of camera/shader trigger during gameplay.",
+	"repository": "https://github.com/RayDeeUx/CameraShaderToggles",
 	"settings": {
 		"enabled": {
 			"name": "Enabled",
