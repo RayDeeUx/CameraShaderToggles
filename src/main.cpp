@@ -44,7 +44,6 @@ class $modify(MyEffectGameObject, EffectGameObject) {
 		if (!Mod::get()->getSettingValue<bool>("enabled")) { return true; }
 		if (cameraFrameToSetting.find(p0) != cameraFrameToSetting.end() && Mod::get()->getSettingValue<bool>(cameraFrameToSetting.find(p0)->second)) { return false; }
 		if (shaderFrameToSetting.find(p0) != shaderFrameToSetting.end() && Mod::get()->getSettingValue<bool>(shaderFrameToSetting.find(p0)->second)) { return false; }
-		log::info("{}", p0);
 		return true;
 	}
 };
