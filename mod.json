@@ -4,7 +4,7 @@
 		"android": "2.205",
 		"win": "2.204"
 	},
-	"version": "v1.0.0",
+	"version": "v1.1.0",
 	"id": "raydeeux.camerashadertoggles",
 	"name": "CameraShaderToggles",
 	"developer": "RayDeeUx",
@@ -13,15 +13,9 @@
 	"settings": {
 		"enabled": {
 			"name": "Enabled",
-			"description": "Toggles the mod.\nBy default, this does not affect levels with star/moon ratings until you enable the \"Enabled on Rated Levels\" option.",
+			"description": "Toggles the mod.",
 			"type": "bool",
 			"default": true
-		},
-		"enableOnRated": {
-			"name": "Enabled on Rated Levels",
-			"description": "Toggles the mod on levels with star/moon ratings.\nRequires previous setting to be enabled.",
-			"type": "bool",
-			"default": false
 		},
 		"disableZoom": {
 			"name": "Disable Zoom Camera",
