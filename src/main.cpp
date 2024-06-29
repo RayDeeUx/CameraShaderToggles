@@ -40,7 +40,7 @@ class $modify(MyEffectGameObject, EffectGameObject) {
 		int id = this->m_objectID;
 		bool existsInCameraMap = cameraIDToSetting.find(id) != cameraIDToSetting.end();
 		if (!existsInCameraMap) { return; }
-		bool settingIsTrue = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second)
+		bool settingIsTrue = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
 		if (settingIsTrue) { return; }
 		EffectGameObject::triggerObject(gjbgl, p1, p2);
 	}
