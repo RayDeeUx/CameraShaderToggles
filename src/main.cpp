@@ -1,6 +1,5 @@
 #include <map>
-#ifdef __APPLE__
-#include <Geode/modify/PlayLayer.hpp>
+#include <Geode/modify/EffectGameObject.hpp>
 
 using namespace geode::prelude;
 
@@ -35,6 +34,26 @@ std::map<int, std::string> shaderIDToSetting = {
 	{ 2923, "disableEditColor" },
 	{ 2924, "disableSplitScreen" }
 };
+
+class $modify(MyEffectGameObject, EffectGameObject) {
+	virtual void triggerObject(GJBaseGameLayer* gjbgl, int p1, gd::vector<int> const* p2) {
+		int id = this->m_objectID;
+		bool existsInCameraMap = cameraIDToSetting.find(id) != cameraIDToSetting.end();
+		if (!existsInCameraMap) { return; }
+		bool settingIsTrue = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second)
+		if (settingIsTrue) { return; }
+		EffectGameObject::triggerObject(gjbgl, p1, p2);
+	}
+};
+
+
+/*
+// old code for archival purposes
+
+#if defined(__APPLE__) || defined(GEODE_IS_ANDROID)
+#include <Geode/modify/PlayLayer.hpp>
+
+using namespace geode::prelude;
 
 class $modify(MyPlayLayer, PlayLayer) {
 	void addObject(GameObject* p0) {
@@ -97,3 +116,5 @@ class $modify(MyEffectGameObject, EffectGameObject) {
 	}
 };
 #endif
+
+*/
