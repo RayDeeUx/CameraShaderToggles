@@ -37,12 +37,16 @@ std::map<int, std::string> shaderIDToSetting = {
 
 class $modify(MyEffectGameObject, EffectGameObject) {
 	virtual void triggerObject(GJBaseGameLayer* gjbgl, int p1, gd::vector<int> const* p2) {
-		int id = this->m_objectID;
-		bool existsInCameraMap = cameraIDToSetting.find(id) != cameraIDToSetting.end();
-		bool existsInShaderMap = shaderIDToSetting.find(id) != shaderIDToSetting.end();
-		if (!existsInCameraMap && !existsInShaderMap) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
-		bool settingIsTrue = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second) || Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
-		if (!settingIsTrue) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
+		if (PlayLayer::get()) {
+			int id = this->m_objectID;
+			bool existsInCameraMap = cameraIDToSetting.find(id) != cameraIDToSetting.end();
+			bool existsInShaderMap = shaderIDToSetting.find(id) != shaderIDToSetting.end();
+			if (!existsInCameraMap && !existsInShaderMap) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
+			bool settingIsTrue = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second) || Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
+			if (!settingIsTrue) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
+		} else {
+			EffectGameObject::triggerObject(gjbgl, p1, p2);
+		}
 	}
 };
 
