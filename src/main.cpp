@@ -44,7 +44,7 @@ class $modify(MyEffectGameObject, EffectGameObject) {
 			if (!existsInCameraMap && !existsInShaderMap) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
 			bool shaderSettingIsTrue = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second);
 			bool cameraSettingIsTrue = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
-			if (!shaderSettingIsTrue && !shaderSettingIsTrue) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
+			if (!shaderSettingIsTrue && !cameraSettingIsTrue) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
 		} else {
 			EffectGameObject::triggerObject(gjbgl, p1, p2);
 		}
