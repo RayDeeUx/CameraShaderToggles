@@ -1,5 +1,5 @@
-#include <map>
 #include <Geode/modify/EffectGameObject.hpp>
+#include <map>
 
 using namespace geode::prelude;
 
@@ -37,15 +37,20 @@ std::map<int, std::string> shaderIDToSetting = {
 
 class $modify(MyEffectGameObject, EffectGameObject) {
 	virtual void triggerObject(GJBaseGameLayer* gjbgl, int p1, gd::vector<int> const* p2) {
-		if (PlayLayer::get()) {
-			int id = this->m_objectID;
-			bool existsInCameraMap = cameraIDToSetting.find(id) != cameraIDToSetting.end();
-			bool existsInShaderMap = shaderIDToSetting.find(id) != shaderIDToSetting.end();
-			if (!existsInCameraMap && !existsInShaderMap) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
-			bool shaderSettingIsTrue = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second);
-			bool cameraSettingIsTrue = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
-			if (!shaderSettingIsTrue && !cameraSettingIsTrue) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
-		} else {
+		if (!PlayLayer::get() || !Mod::get()->getSettingValue<bool>("enabled")) {
+			EffectGameObject::triggerObject(gjbgl, p1, p2);
+			return;
+		}
+		int id = this->m_objectID;
+		bool existsInCameraMap = cameraIDToSetting.contains(id);
+		bool existsInShaderMap = shaderIDToSetting.contains(id);
+		if (!existsInCameraMap && !existsInShaderMap) {
+			EffectGameObject::triggerObject(gjbgl, p1, p2);
+			return;
+		}
+		bool shaderSettingIsTrue = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second);
+		bool cameraSettingIsTrue = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
+		if (!shaderSettingIsTrue && !cameraSettingIsTrue) {
 			EffectGameObject::triggerObject(gjbgl, p1, p2);
 		}
 	}
