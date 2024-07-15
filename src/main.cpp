@@ -1,3 +1,4 @@
+#include <Geode/modify/CameraTriggerGameObject.hpp>
 #include <Geode/modify/EffectGameObject.hpp>
 #include <map>
 
@@ -36,22 +37,34 @@ std::map<int, std::string> shaderIDToSetting = {
 };
 
 class $modify(MyEffectGameObject, EffectGameObject) {
-	virtual void triggerObject(GJBaseGameLayer* gjbgl, int p1, gd::vector<int> const* p2) {
+	void triggerObject(GJBaseGameLayer* gjbgl, int p1, gd::vector<int> const* p2) {
+		if (!PlayLayer::get() || !Mod::get()->getSettingValue<bool>("enabled")) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
+		int id = this->m_objectID;
+		bool cameraMap = cameraIDToSetting.contains(id);
+		bool shaderMap = shaderIDToSetting.contains(id);
+		if (!cameraMap && !shaderMap) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
+		bool cameraSetting = false;
+		if (cameraMap) { cameraSetting = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second); }
+		bool shaderSetting = false;
+		if (shaderMap) { shaderSetting = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second); }
+		if (!cameraSetting && !shaderSetting) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
+	}
+};
+
+/*
+	this hook is also necessary despite CameraTriggerGameObject
+	being a downcast of EffectGameObject.
+	why, robtop?
+	-- raydeeux
+*/
+class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
+	void triggerObject(GJBaseGameLayer* gjbgl, int p1, gd::vector<int> const* p2) {
 		if (!PlayLayer::get() || !Mod::get()->getSettingValue<bool>("enabled")) {
-			EffectGameObject::triggerObject(gjbgl, p1, p2);
-			return;
+			return CameraTriggerGameObject::triggerObject(gjbgl, p1, p2);
 		}
 		int id = this->m_objectID;
-		bool existsInCameraMap = cameraIDToSetting.contains(id);
-		bool existsInShaderMap = shaderIDToSetting.contains(id);
-		if (!existsInCameraMap && !existsInShaderMap) {
-			EffectGameObject::triggerObject(gjbgl, p1, p2);
-			return;
-		}
-		bool shaderSettingIsTrue = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second);
-		bool cameraSettingIsTrue = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
-		if (!shaderSettingIsTrue && !cameraSettingIsTrue) {
-			EffectGameObject::triggerObject(gjbgl, p1, p2);
+		if (!cameraIDToSetting.contains(id) || !Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second)) {
+			return CameraTriggerGameObject::triggerObject(gjbgl, p1, p2);
 		}
 	}
 };

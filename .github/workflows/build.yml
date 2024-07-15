@@ -35,8 +35,8 @@ jobs:
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          build-config: RelWithDebInfo # comment out to Release mode
-          export-pdb: true # comment out to Release mode
+          # build-config: RelWithDebInfo # comment out to Release mode
+          # export-pdb: true # comment out to Release mode
           # bindings: "RayDeeUx/bindings" # comment this out to swap to "geode-sdk/bindings"
           # bindings-ref: "camerashadertoggles" # comment this out to use default branch
           # sdk: nightly
