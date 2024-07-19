@@ -8,4 +8,4 @@ https://github.com/RayDeeUx/CameraShaderToggles/assets/51521765/549a3131-7b70-45
 
 (Disclaimer: other Geode mods were active during this recording.)
 
-This mod will not work on macOS.
+This [Geode mod](https://geode-sdk.org) is licensed under LGPLv2. To report bugs or get help with using my mods, press the Discord button on the lower left corner.
