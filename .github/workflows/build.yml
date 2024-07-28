@@ -39,7 +39,7 @@ jobs:
           # export-pdb: true # comment out to Release mode
           # bindings: "RayDeeUx/bindings" # comment this out to swap to "geode-sdk/bindings"
           # bindings-ref: "camerashadertoggles" # comment this out to use default branch
-          sdk: nightly # comment this out to use stable Geode SDK version
+          # sdk: nightly # comment this out to use stable Geode SDK version
           combine: true
           target: ${{ matrix.config.target }}
 
