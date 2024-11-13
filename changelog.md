@@ -1,4 +1,6 @@
 # CameraShaderToggles Changelog
+## v1.3.0
+- Port to 2.2074.
 ## v1.2.0
 - Port to 2.206, with big help from iAndy_HD3. Big thanks to CatXus, Aktimoose, ninXout, and hiimjustin000 for helping out with testing!
 - Added macOS support.
