@@ -98,8 +98,8 @@ $on_mod(Loaded) {
 	ADD_TOGGLE("Disable Static Camera", "disableStatic", "Disable all Static camera triggers.")
 	ADD_TOGGLE("Disable Offset Camera", "disableOffset", "Disable all Offset camera triggers.")
 	ADD_TOGGLE("Disable Rotate Camera", "disableRotate", "Disable all Rotate camera triggers.")
-	ADD_TOGGLE("Disable Guide Camera", "disableGuide", "Disable all Guide camera triggers.")
+	ADD_TOGGLE("Disable Camera Guide Camera", "disableGuide", "Disable all Camera Guide triggers.")
 	ADD_TOGGLE("Disable Edge Camera", "disableEdge", "Disable all Edge camera triggers.")
-	ADD_TOGGLE("Disable GPOffset Camera", "disableGPOffset", "Disable all GPOffset camera triggers.")
-	ADD_TOGGLE("Disable Mode Camera", "disableMode", "Disable all Mode camera triggers.")
+	ADD_TOGGLE("Disable GP Offset Camera", "disableGPOffset", "Disable all GP Offset camera triggers.")
+	ADD_TOGGLE("Disable Camera Mode", "disableMode", "Disable all Camera Mode triggers.")
 }
