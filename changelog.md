@@ -1,4 +1,6 @@
 # CameraShaderToggles Changelog
+## v1.4.0
+- Added More Option API support.
 ## v1.3.0
 - Port to 2.2074.
 ## v1.2.0

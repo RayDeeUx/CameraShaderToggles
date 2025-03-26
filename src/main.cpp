@@ -1,6 +1,6 @@
+#include <ninxout.options_api/include/API.hpp>
 #include <Geode/modify/CameraTriggerGameObject.hpp>
 #include <Geode/modify/EffectGameObject.hpp>
-#include <map>
 
 using namespace geode::prelude;
 
@@ -39,26 +39,67 @@ std::map<int, std::string> shaderIDToSetting = {
 class $modify(MyEffectGameObject, EffectGameObject) {
 	void triggerObject(GJBaseGameLayer* gjbgl, int p1, gd::vector<int> const* p2) {
 		if (!PlayLayer::get() || !Mod::get()->getSettingValue<bool>("enabled")) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
-		int id = this->m_objectID;
-		bool cameraMap = cameraIDToSetting.contains(id);
-		bool shaderMap = shaderIDToSetting.contains(id);
-		if (!cameraMap && !shaderMap) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
+		const int id = this->m_objectID;
+		const bool cameraMap = cameraIDToSetting.contains(id);
+		const bool shaderMap = shaderIDToSetting.contains(id);
+		if (!cameraMap && !shaderMap) return EffectGameObject::triggerObject(gjbgl, p1, p2);
 		bool cameraSetting = false;
-		if (cameraMap) { cameraSetting = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second); }
+		if (cameraMap) cameraSetting = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
 		bool shaderSetting = false;
-		if (shaderMap) { shaderSetting = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second); }
-		if (!cameraSetting && !shaderSetting) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
+		if (shaderMap) shaderSetting = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second);
+		if (!cameraSetting && !shaderSetting) return EffectGameObject::triggerObject(gjbgl, p1, p2);
 	}
 };
 
 class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 	void triggerObject(GJBaseGameLayer* gjbgl, int p1, gd::vector<int> const* p2) {
-		if (!PlayLayer::get() || !Mod::get()->getSettingValue<bool>("enabled")) {
+		if (!PlayLayer::get() || !Mod::get()->getSettingValue<bool>("enabled"))
 			return CameraTriggerGameObject::triggerObject(gjbgl, p1, p2);
-		}
-		int id = this->m_objectID;
-		if (!cameraIDToSetting.contains(id) || !Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second)) {
+		const int id = this->m_objectID;
+		if (!cameraIDToSetting.contains(id) || !Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second))
 			return CameraTriggerGameObject::triggerObject(gjbgl, p1, p2);
-		}
 	}
 };
+
+#define ADD_TOGGLE(displayName, settingsID, detailedDesc)\
+	OptionsAPI::addPreLevelSetting<bool>(\
+		displayName,\
+		settingsID""_spr,\
+		[](GJGameLevel*) {\
+			const bool origValue = Mod::get()->getSettingValue<bool>(settingsID);\
+			Mod::get()->setSettingValue<bool>(settingsID, !origValue);\
+		},\
+		[](GJGameLevel*) {\
+			return Mod::get()->getSettingValue<bool>(settingsID);\
+		},\
+		"<cl>(From CameraShaderToggles)</c>\n" detailedDesc\
+	);
+
+$on_mod(Loaded) {
+	ADD_TOGGLE("Disable Shader Setup Shader", "disableShader", "Disable all Shader shader triggers.")
+	ADD_TOGGLE("Disable Shock Wave Shader", "disableShockWave", "Disable all Shock Wave shader triggers.")
+	ADD_TOGGLE("Disable Shock Line Shader", "disableShockLine", "Disable all Shock Line shader triggers.")
+	ADD_TOGGLE("Disable Glitch Shader", "disableGlitch", "Disable all Glitch shader triggers.")
+	ADD_TOGGLE("Disable Chromatic Shader", "disableChromatic", "Disable all Chromatic shader triggers.")
+	ADD_TOGGLE("Disable Chromatic Glitch Shader", "disableChromaticGlitch", "Disable all Chromatic Glitch shader triggers.")
+	ADD_TOGGLE("Disable Pixelate Shader", "disablePixelate", "Disable all Pixelate shader triggers.")
+	ADD_TOGGLE("Disable Lens Circle Shader", "disableLensCircle", "Disable all Lens Circle shader triggers.")
+	ADD_TOGGLE("Disable Radial Blur Shader", "disableRadialBlur", "Disable all Radial Blur shader triggers.")
+	ADD_TOGGLE("Disable Motion Blur Shader", "disableMotionBlur", "Disable all Motion Blur shader triggers.")
+	ADD_TOGGLE("Disable Bulge Shader", "disableBulge", "Disable all Bulge shader triggers.")
+	ADD_TOGGLE("Disable Pinch Shader", "disablePinch", "Disable all Pinch shader triggers.")
+	ADD_TOGGLE("Disable Grayscale Shader", "disableGrayscale", "Disable all Grayscale shader triggers.")
+	ADD_TOGGLE("Disable Sepia Shader", "disableSepia", "Disable all Sepia shader triggers.")
+	ADD_TOGGLE("Disable Invert Color Shader", "disableInvertColor", "Disable all Invert Color shader triggers.")
+	ADD_TOGGLE("Disable Hue Shader", "disableHue", "Disable all Hue shader triggers.")
+	ADD_TOGGLE("Disable Edit Color Shader", "disableEditColor", "Disable all Edit Color shader triggers.")
+	ADD_TOGGLE("Disable Split Screen Shader", "disableSplitScreen", "Disable all Split Screen shader triggers.")
+	ADD_TOGGLE("Disable Zoom Camera", "disableZoom", "Disable all Zoom camera triggers.")
+	ADD_TOGGLE("Disable Static Camera", "disableStatic", "Disable all Static camera triggers.")
+	ADD_TOGGLE("Disable Offset Camera", "disableOffset", "Disable all Offset camera triggers.")
+	ADD_TOGGLE("Disable Rotate Camera", "disableRotate", "Disable all Rotate camera triggers.")
+	ADD_TOGGLE("Disable Guide Camera", "disableGuide", "Disable all Guide camera triggers.")
+	ADD_TOGGLE("Disable Edge Camera", "disableEdge", "Disable all Edge camera triggers.")
+	ADD_TOGGLE("Disable GPOffset Camera", "disableGPOffset", "Disable all GPOffset camera triggers.")
+	ADD_TOGGLE("Disable Mode Camera", "disableMode", "Disable all Mode camera triggers.")
+}
