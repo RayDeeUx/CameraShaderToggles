@@ -1,5 +1,5 @@
 {
-	"geode": "4.0.0-beta.1",
+	"geode": "4.2.0",
 	"gd": {
 		"mac": "2.2074",
 		"android": "2.2074",
@@ -150,6 +150,17 @@
 			"default": false
 		}
 	},
+	"dependencies": {
+		"ninxout.options_api": {
+			"version": "1.0.0",
+			"importance": "suggested"
+		}
+	},
+	"tags":	[
+		"cheat",
+		"offline",
+		"gameplay"
+	],
 	"issues": {
 		"url": "https://discord.com/channels/911701438269386882/1205523212444639292",
 		"info": "Ping me <cl>(@erymanthus)</c> in the Geode SDK Discord server's <cl>#help</c> channel if you need help. <cr>Crash reports from this mod while MHv8 is installed will be ignored. DMs are NOT accepted.</c>"
