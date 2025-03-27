@@ -1,6 +1,6 @@
-#include <ninxout.options_api/include/API.hpp>
 #include <Geode/modify/CameraTriggerGameObject.hpp>
 #include <Geode/modify/EffectGameObject.hpp>
+#include <ninxout.options_api/include/API.hpp>
 
 using namespace geode::prelude;
 
@@ -76,20 +76,6 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 	);
 
 $on_mod(Loaded) {
-	log::info(" says hello!"_spr);
-
-	OptionsAPI::addPreLevelSetting<bool>(\
-		"Disable Shader Setup Shader",\
-		"disableShader"_spr,\
-		[](GJGameLevel*) {\
-			const bool origValue = Mod::get()->getSettingValue<bool>("disableShader");\
-			Mod::get()->setSettingValue<bool>("disableShader", !origValue);\
-		},\
-		[](GJGameLevel*) {\
-			return Mod::get()->getSettingValue<bool>("disableShader");\
-		},\
-		"<cl>(From CameraShaderToggles)</c>\nDisable all Shader shader triggers."
-	);
 	ADD_TOGGLE("Disable Shader Setup Shader", "disableShader", "Disable all Shader shader triggers.")
 	ADD_TOGGLE("Disable Shock Wave Shader", "disableShockWave", "Disable all Shock Wave shader triggers.")
 	ADD_TOGGLE("Disable Shock Line Shader", "disableShockLine", "Disable all Shock Line shader triggers.")
@@ -116,5 +102,4 @@ $on_mod(Loaded) {
 	ADD_TOGGLE("Disable Edge Camera", "disableEdge", "Disable all Edge camera triggers.")
 	ADD_TOGGLE("Disable GP Offset Camera", "disableGPOffset", "Disable all GP Offset camera triggers.")
 	ADD_TOGGLE("Disable Camera Mode", "disableMode", "Disable all Camera Mode triggers.")
-	log::info(" says goodbye!"_spr);
 }
