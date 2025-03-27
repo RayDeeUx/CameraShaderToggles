@@ -62,6 +62,8 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 };
 
 #define ADD_TOGGLE(displayName, settingsID, detailedDesc)\
+	log::info("{}", settingsID""_spr);\
+	log::info(settingsID""_spr);\
 	OptionsAPI::addPreLevelSetting<bool>(\
 		displayName,\
 		settingsID""_spr,\
