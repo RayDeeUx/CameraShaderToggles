@@ -64,12 +64,13 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 #define ADD_TOGGLE(displayName, settingsID, detailedDesc)\
 	OptionsAPI::addPreLevelSetting<bool>(\
 		displayName,\
-		fmt::format("{}"_spr, settingsID),\
+		settingsID""_spr,\
 		[](GJGameLevel*) {\
 			const bool origValue = Mod::get()->getSettingValue<bool>(settingsID);\
 			Mod::get()->setSettingValue<bool>(settingsID, !origValue);\
 		},\
 		[](GJGameLevel*) {\
+			log::info("hello world! settingsID: {}", settingsID);\
 			return Mod::get()->getSettingValue<bool>(settingsID);\
 		},\
 		"<cl>(From CameraShaderToggles)</c>\n" detailedDesc\
