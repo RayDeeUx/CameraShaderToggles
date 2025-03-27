@@ -70,7 +70,6 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 			Mod::get()->setSettingValue<bool>(settingsID, !origValue);\
 		},\
 		[](GJGameLevel*) {\
-			log::info("hello world! settingsID: {}", settingsID);\
 			return Mod::get()->getSettingValue<bool>(settingsID);\
 		},\
 		"<cl>(From CameraShaderToggles)</c>\n" detailedDesc\
@@ -78,6 +77,19 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 
 $on_mod(Loaded) {
 	log::info(" says hello!"_spr);
+
+	OptionsAPI::addPreLevelSetting<bool>(\
+		"Disable Shader Setup Shader",\
+		"disableShader"_spr,\
+		[](GJGameLevel*) {\
+			const bool origValue = Mod::get()->getSettingValue<bool>("disableShader");\
+			Mod::get()->setSettingValue<bool>("disableShader", !origValue);\
+		},\
+		[](GJGameLevel*) {\
+			return Mod::get()->getSettingValue<bool>("disableShader");\
+		},\
+		"<cl>(From CameraShaderToggles)</c>\nDisable all Shader shader triggers."
+	);
 	ADD_TOGGLE("Disable Shader Setup Shader", "disableShader", "Disable all Shader shader triggers.")
 	ADD_TOGGLE("Disable Shock Wave Shader", "disableShockWave", "Disable all Shock Wave shader triggers.")
 	ADD_TOGGLE("Disable Shock Line Shader", "disableShockLine", "Disable all Shock Line shader triggers.")
