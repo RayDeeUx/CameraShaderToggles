@@ -76,6 +76,7 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 	);
 
 $on_mod(Loaded) {
+	log::info(" says hello!"_spr);
 	ADD_TOGGLE("Disable Shader Setup Shader", "disableShader", "Disable all Shader shader triggers.")
 	ADD_TOGGLE("Disable Shock Wave Shader", "disableShockWave", "Disable all Shock Wave shader triggers.")
 	ADD_TOGGLE("Disable Shock Line Shader", "disableShockLine", "Disable all Shock Line shader triggers.")
@@ -102,4 +103,5 @@ $on_mod(Loaded) {
 	ADD_TOGGLE("Disable Edge Camera", "disableEdge", "Disable all Edge camera triggers.")
 	ADD_TOGGLE("Disable GP Offset Camera", "disableGPOffset", "Disable all GP Offset camera triggers.")
 	ADD_TOGGLE("Disable Camera Mode", "disableMode", "Disable all Camera Mode triggers.")
+	log::info(" says goodbye!"_spr);
 }
