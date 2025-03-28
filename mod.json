@@ -18,6 +18,12 @@
 			"type": "bool",
 			"default": true
 		},
+		"optionsAPI": {
+			"name": "Settings as Options",
+			"description": "Adds the checkmark (boolean) settings of this mod into the \"More Options\" menu.\n<cy>Requires ninXout's Options API mod.</c>\n<c_>Changing ths setting requires a full game restart.</c>",
+			"type": "bool",
+			"default": true
+		},
 		"disableZoom": {
 			"name": "Disable Zoom Camera",
 			"type": "bool",
@@ -146,6 +152,61 @@
 		},
 		"disableSplitScreen": {
 			"name": "Disable Split Screen Shader",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaMove": {
+			"name": "Disable Area Move",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaRotate": {
+			"name": "Disable Area Rotate",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaScale": {
+			"name": "Disable Area Scale",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaFade":{
+			"name": "Disable Area Fade",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaTint": {
+			"name": "Disable Area Tint",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaEditMove":{
+			"name": "Disable Area EditMove",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaEditRotate": {
+			"name": "Disable Area EditRotate",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaEditScale":{
+			"name": "Disable Area EditScale",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaEditFade": {
+			"name": "Disable Area EditFade",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaEditTint":{
+			"name": "Disable Area EditTint",
+			"type": "bool",
+			"default": false
+		},
+		"disableAreaStop": {
+			"name": "Disable Area Stop",
 			"type": "bool",
 			"default": false
 		}

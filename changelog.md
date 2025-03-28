@@ -1,6 +1,7 @@
 # CameraShaderToggles Changelog
 ## v1.4.0
-- Added More Option API support.
+- Added toggles for Area triggers.
+- Added Options API support.
 ## v1.3.0
 - Port to 2.2074.
 ## v1.2.0

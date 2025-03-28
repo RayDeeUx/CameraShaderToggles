@@ -4,7 +4,7 @@
 
 using namespace geode::prelude;
 
-std::map<int, std::string> cameraIDToSetting = {
+const static std::map<int, std::string> cameraIDToSetting = {
 	{ 1913, "disableZoom" },
 	{ 1914, "disableStatic" },
 	{ 1916, "disableOffset" },
@@ -15,7 +15,7 @@ std::map<int, std::string> cameraIDToSetting = {
 	{ 2925, "disableMode" }
 };
 
-std::map<int, std::string> shaderIDToSetting = {
+const static std::map<int, std::string> shaderIDToSetting = {
 	{ 2904, "disableShader" },
 	{ 2905, "disableShockWave" },
 	{ 2907, "disableShockLine" },
@@ -36,18 +36,38 @@ std::map<int, std::string> shaderIDToSetting = {
 	{ 2924, "disableSplitScreen" }
 };
 
+const static std::map<int, std::string> areaIDToSetting = {
+	{ 3006, "disableAreaMove" },
+	{ 3007, "disableAreaRotate" },
+	{ 3008, "disableAreaScale" },
+	{ 3009, "disableAreaFade" },
+	{ 3010, "disableAreaTint" },
+	{ 3011, "disableAreaEditMove" },
+	{ 3012, "disableAreaEditRotate" },
+	{ 3013, "disableAreaEditScale" },
+	{ 3014, "disableAreaEditFade" },
+	{ 3015, "disableAreaEditTint" },
+	{ 3024, "disableAreaStop" }
+};
+
 class $modify(MyEffectGameObject, EffectGameObject) {
 	void triggerObject(GJBaseGameLayer* gjbgl, int p1, gd::vector<int> const* p2) {
 		if (!PlayLayer::get() || !Mod::get()->getSettingValue<bool>("enabled")) { return EffectGameObject::triggerObject(gjbgl, p1, p2); }
 		const int id = this->m_objectID;
+
 		const bool cameraMap = cameraIDToSetting.contains(id);
 		const bool shaderMap = shaderIDToSetting.contains(id);
-		if (!cameraMap && !shaderMap) return EffectGameObject::triggerObject(gjbgl, p1, p2);
+		const bool areaMap = areaIDToSetting.contains(id);
+		if (!cameraMap && !shaderMap && !areaMap) return EffectGameObject::triggerObject(gjbgl, p1, p2);
+
 		bool cameraSetting = false;
-		if (cameraMap) cameraSetting = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
 		bool shaderSetting = false;
+		bool areaSetting = false;
+		if (cameraMap) cameraSetting = Mod::get()->getSettingValue<bool>(cameraIDToSetting.find(id)->second);
 		if (shaderMap) shaderSetting = Mod::get()->getSettingValue<bool>(shaderIDToSetting.find(id)->second);
-		if (!cameraSetting && !shaderSetting) return EffectGameObject::triggerObject(gjbgl, p1, p2);
+		if (areaMap) areaSetting = Mod::get()->getSettingValue<bool>(areaIDToSetting.find(id)->second);
+
+		if (!cameraSetting && !shaderSetting && !areaSetting) return EffectGameObject::triggerObject(gjbgl, p1, p2);
 	}
 };
 
@@ -62,8 +82,6 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 };
 
 #define ADD_TOGGLE(displayName, settingsID, detailedDesc)\
-	log::info("{}", settingsID""_spr);\
-	log::info(settingsID""_spr);\
 	OptionsAPI::addPreLevelSetting<bool>(\
 		displayName,\
 		settingsID""_spr,\
@@ -78,6 +96,7 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 	);
 
 $on_mod(Loaded) {
+	if (!Mod::get()->getSettingValue<bool>("optionsAPI")) return;
 	ADD_TOGGLE("Disable Shader Setup Shader", "disableShader", "Disable all Shader shader triggers.")
 	ADD_TOGGLE("Disable Shock Wave Shader", "disableShockWave", "Disable all Shock Wave shader triggers.")
 	ADD_TOGGLE("Disable Shock Line Shader", "disableShockLine", "Disable all Shock Line shader triggers.")
@@ -104,4 +123,15 @@ $on_mod(Loaded) {
 	ADD_TOGGLE("Disable Edge Camera", "disableEdge", "Disable all Edge camera triggers.")
 	ADD_TOGGLE("Disable GP Offset Camera", "disableGPOffset", "Disable all GP Offset camera triggers.")
 	ADD_TOGGLE("Disable Camera Mode", "disableMode", "Disable all Camera Mode triggers.")
+	ADD_TOGGLE("Disable Area Move", "disableAreaMove", "Disable all Area Move triggers.")
+	ADD_TOGGLE("Disable Area Rotate", "disableAreaRotate", "Disable all Area Rotate triggers.")
+	ADD_TOGGLE("Disable Area Scale", "disableAreaScale", "Disable all Area Scale triggers.")
+	ADD_TOGGLE("Disable Area Fade", "disableAreaFade", "Disable all Area Fade triggers.")
+	ADD_TOGGLE("Disable Area Tint", "disableAreaTint", "Disable all Area Tint triggers.")
+	ADD_TOGGLE("Disable Edit Area Move", "disableAreaEditMove", "Disable all Edit Area Move triggers.")
+	ADD_TOGGLE("Disable Edit Area Rotate", "disableAreaEditRotate", "Disable all Edit Area Rotate triggers.")
+	ADD_TOGGLE("Disable Edit Area Scale", "disableAreaEditScale", "Disable all Edit Area Scale triggers.")
+	ADD_TOGGLE("Disable Edit Area Fade", "disableAreaEditFade", "Disable all Edit Area Fade triggers.")
+	ADD_TOGGLE("Disable Edit Area Tint", "disableAreaEditTint", "Disable all Edit Area Tint triggers.")
+	ADD_TOGGLE("Disable Area Stop", "disableAreaStop", "Disable all Area Stop triggers.")
 }
