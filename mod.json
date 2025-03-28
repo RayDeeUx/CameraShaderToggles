@@ -212,10 +212,7 @@
 		}
 	},
 	"dependencies": {
-		"ninxout.options_api": {
-			"version": "1.0.0",
-			"importance": "recommended"
-		}
+		"ninxout.options_api": "1.0.0"
 	},
 	"tags":	[
 		"cheat",
