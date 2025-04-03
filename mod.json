@@ -1,11 +1,12 @@
 {
-	"geode": "4.2.0",
+	"geode": "4.3.1",
 	"gd": {
 		"mac": "2.2074",
 		"android": "2.2074",
-		"win": "2.2074"
+		"win": "2.2074",
+		"ios": "2.2074"
 	},
-	"version": "v1.4.0",
+	"version": "v1.4.1",
 	"id": "raydeeux.camerashadertoggles",
 	"name": "CameraShaderToggles",
 	"developer": "RayDeeUx",
@@ -170,7 +171,7 @@
 			"type": "bool",
 			"default": false
 		},
-		"disableAreaFade":{
+		"disableAreaFade": {
 			"name": "Disable Area Fade",
 			"type": "bool",
 			"default": false
@@ -180,7 +181,7 @@
 			"type": "bool",
 			"default": false
 		},
-		"disableAreaEditMove":{
+		"disableAreaEditMove": {
 			"name": "Disable Area EditMove",
 			"type": "bool",
 			"default": false
@@ -190,7 +191,7 @@
 			"type": "bool",
 			"default": false
 		},
-		"disableAreaEditScale":{
+		"disableAreaEditScale": {
 			"name": "Disable Area EditScale",
 			"type": "bool",
 			"default": false
@@ -200,7 +201,7 @@
 			"type": "bool",
 			"default": false
 		},
-		"disableAreaEditTint":{
+		"disableAreaEditTint": {
 			"name": "Disable Area EditTint",
 			"type": "bool",
 			"default": false
@@ -215,7 +216,7 @@
 		"ninxout.options_api": "1.0.0"
 	},
 	"README": "i'm not a huge fan of making Options API a required depdendency, but there's been this stupid bug where marking it as anything lower than a required depdendency stops the toggles from being added to the game. sorry about that--to compensate, you can toggle that option off in the mod settings.",
-	"tags":	[
+	"tags": [
 		"cheat",
 		"offline",
 		"gameplay"
