@@ -1,4 +1,6 @@
 # CameraShaderToggles Changelog
+## v1.4.1
+- Experimental iOS support.
 ## v1.4.0
 - Added toggles for Area triggers.
 - Added Options API support.
