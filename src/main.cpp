@@ -82,7 +82,7 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 };
 
 #define ADD_TOGGLE(displayName, settingsID, detailedDesc)\
-	OptionsAPI::addMidLevelSetting<bool>(\
+	OptionsAPI::addPreLevelSetting<bool>(\
 		displayName,\
 		settingsID""_spr,\
 		[](GJGameLevel*) {\
@@ -90,6 +90,18 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 			Mod::get()->setSettingValue<bool>(settingsID, !origValue);\
 		},\
 		[](GJGameLevel*) {\
+			return Mod::get()->getSettingValue<bool>(settingsID);\
+		},\
+		"<cl>(From CameraShaderToggles)</c>\n" detailedDesc\
+	);\
+	OptionsAPI::addMidLevelSetting<bool>(\
+		displayName,\
+		settingsID""_spr,\
+		[](GJBaseGameLayer*) {\
+			const bool origValue = Mod::get()->getSettingValue<bool>(settingsID);\
+			Mod::get()->setSettingValue<bool>(settingsID, !origValue);\
+		},\
+		[](GJBaseGameLayer*) {\
 			return Mod::get()->getSettingValue<bool>(settingsID);\
 		},\
 		"<cl>(From CameraShaderToggles)</c>\n" detailedDesc\
