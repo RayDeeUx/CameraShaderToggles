@@ -93,6 +93,18 @@ class $modify(MyCameraTriggerGameObject, CameraTriggerGameObject) {
 			return Mod::get()->getSettingValue<bool>(settingsID);\
 		},\
 		"<cl>(From CameraShaderToggles)</c>\n" detailedDesc\
+	);\
+	OptionsAPI::addMidLevelSetting<bool>(\
+		displayName,\
+		settingsID""_spr,\
+		[](GJBaseGameLayer*) {\
+			const bool origValue = Mod::get()->getSettingValue<bool>(settingsID);\
+			Mod::get()->setSettingValue<bool>(settingsID, !origValue);\
+		},\
+		[](GJBaseGameLayer*) {\
+			return Mod::get()->getSettingValue<bool>(settingsID);\
+		},\
+		"<cl>(From CameraShaderToggles)</c>\n" detailedDesc\
 	);
 
 $on_mod(Loaded) {
