@@ -1,4 +1,7 @@
 # CameraShaderToggles Changelog
+## v1.4.2
+- Added all mod toggles to the pause menu options screen.
+- Made Options API an optional dependency.
 ## v1.4.1
 - Experimental iOS support.
 ## v1.4.0
