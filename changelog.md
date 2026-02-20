@@ -1,4 +1,6 @@
 # CameraShaderToggles Changelog
+## v1.4.3
+- Port to GD 2.2081.
 ## v1.4.2
 - Added all mod toggles to the pause menu options screen.
 - Made Options API an optional dependency.
