@@ -1,4 +1,6 @@
 # CameraShaderToggles Changelog
+## v1.4.4
+- Recompile against Geode v5.0.0-beta.4.
 ## v1.4.3
 - Port to GD 2.2081.
 ## v1.4.2
